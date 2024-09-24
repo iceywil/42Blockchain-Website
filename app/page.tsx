@@ -24,7 +24,6 @@ export default function Home() {
 					<p className="text-white text-4xl">Loading...</p>
 				</div>
 			)}
-			<Nav />
 			<div className="flex-1">
 				<GlobeVisualization setLoading={handleSetLoading} />
 			</div>
