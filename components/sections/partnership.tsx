@@ -65,7 +65,7 @@ export function Partnership() {
               <Image
                 src={partner.logo}
                 alt={partner.alt}
-                className="h-16 w-auto"
+                className="h-12 w-auto"
                 priority
               />
             </div>

@@ -7,7 +7,7 @@ export function Presence() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative max-md:hidden">
-            <Image src="" alt="Planet" width={300} height={300} />
+            <Image unoptimized src="/42blockchain_logo.gif" alt="42Blockchain Logo" width={700} height={700} />
           </div>
           <div className="space-y-8">
             <h2 className="text-3xl font-bold">Global Presence, Local Impact</h2>
