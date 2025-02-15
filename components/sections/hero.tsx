@@ -45,9 +45,9 @@ export function Hero() {
             </div>
           </div>
         </div>
-       {/*  <div className="w-1/3">
+		<div className="w-1/3">
 			<Globe_data />
-        </div> */}
+        </div>
       </div>
     </section>
   )
