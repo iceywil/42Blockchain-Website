@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: "The largest Blockchain Developer Student's Union",
 }
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +22,7 @@ export default function RootLayout({
         <link rel="icon" href="/42favicon.svg" />
       </head>
       <body
-        className={`${inter.className} bg-dark-blue text-white min-h-screen relative `}
+        className={`${inter.className} bg-black text-white min-h-screen relative `}
       >
         <Header />
         {children}

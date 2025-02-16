@@ -8,7 +8,7 @@ type StatsProps = {
 
 export function Stats({ stats }: { stats: StatsProps[] }) {
   return (
-    <div className="flex flex-wrap justify-center gap-4 mb-12">
+    <div className="flex flex-wrap justify-center gap-4">
       {stats.map((stat: StatsProps) => (
         <div key={stat.label}
           className="flex items-center rounded-full px-4 py-2 border 

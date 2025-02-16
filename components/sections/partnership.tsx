@@ -13,34 +13,6 @@ function usePartnerCarousel() {
 
     const content = container.innerHTML
     container.innerHTML += content
-
-    let animationFrameId: number
-    let scrollPosition = container.scrollWidth / 2
-
-    const animate = () => {
-      scrollPosition -= 1
-      container.scrollLeft = scrollPosition
-
-      if (scrollPosition <= 0) {
-        scrollPosition = container.scrollWidth / 2
-      }
-
-      animationFrameId = requestAnimationFrame(animate)
-    }
-
-    animationFrameId = requestAnimationFrame(animate)
-
-    const handleMouseEnter = () => cancelAnimationFrame(animationFrameId)
-    const handleMouseLeave = () => (animationFrameId = requestAnimationFrame(animate))
-
-    container.addEventListener('mouseenter', handleMouseEnter)
-    container.addEventListener('mouseleave', handleMouseLeave)
-
-    return () => {
-      cancelAnimationFrame(animationFrameId)
-      container.removeEventListener('mouseenter', handleMouseEnter)
-      container.removeEventListener('mouseleave', handleMouseLeave)
-    }
   }, [])
 
   return ref
@@ -65,7 +37,7 @@ export function Partnership() {
               <Image
                 src={partner.logo}
                 alt={partner.alt}
-                className="h-12 w-auto"
+                className="h-10 w-auto"
                 priority
               />
             </div>

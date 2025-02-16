@@ -11,7 +11,7 @@ import {
   eth_global_bangkok,
   kiln_conf,
   algorand_hackathon
-} from '@/assets'
+} from '@/public'
 import { LinkedIn } from '@/components/svg/linkedin'
 import { Twitter } from '@/components/svg/twitter'
 import { Discord } from '@/components/svg/discord'
@@ -20,7 +20,7 @@ import { YouTube } from '@/components/svg/youtube'
 import { Zealy } from '@/components/svg/zealy'
 
 export const stats = [
-  { label: "Members", value: "713", icon: Users },
+  { label: "Members", value: "2053", icon: Users },
   { label: "Campus", value: "54", icon: GraduationCap },
   { label: "Projects", value: "20+", icon: Rocket },
   { label: "Partners", value: "10+", icon: Building2 },

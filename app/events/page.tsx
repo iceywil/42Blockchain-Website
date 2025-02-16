@@ -40,7 +40,7 @@ export default function EventsPage() {
                   <Button
                     variant="outline"
                     className="border-light-blue text-light-blue 
-                      hover:bg-light-blue/40 hover:text-white/90 bg-dark-blue w-full"
+                      hover:bg-light-blue/40 hover:text-white/90 bg-black w-full"
                   >
                     <Link href={`${discordLink}`} target='_blank'>
                       Learn More
