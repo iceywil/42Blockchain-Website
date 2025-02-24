@@ -5,23 +5,27 @@ import { Navbar } from '@/components/navbar';
 export function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className=" border-t border-white/10">
-      <div className="container mx-auto px-4 py-8 max-md:py-4 flex max-md:flex-col max-md:gap-4 md:justify-between md:items-center">
-        <Link href={"/"}>
-          <Image
-            src="/logo.svg"
-            alt="42Blockchain logo"
-            width={120}
-            height={53}
-            priority
-
-          />
-        </Link>
-        <Navbar className="flex flex-wrap" />
+    <footer className="border-t border-white/10">
+      <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center gap-6 md:gap-0">
+        <div className="flex items-center justify-center md:justify-start w-full md:w-auto">
+          <Link href={"/"}>
+            <Image
+              src="/logo.svg"
+              alt="42Blockchain logo"
+              width={120}
+              height={53}
+              priority
+              className="h-auto"
+            />
+          </Link>
+        </div>
+        <Navbar className="flex flex-wrap justify-center md:justify-end w-full md:flex-1" />
       </div>
-      <h2 className="text-gray-400 text-sm text-center  pt-4 mb-1">
-        © {currentYear} 42Blockchain. All rights reserved.
-      </h2>
+      <div className="container mx-auto px-4 pb-4">
+        <p className="text-gray-400 text-sm text-center">
+          © {currentYear} 42Blockchain. All rights reserved.
+        </p>
+      </div>
     </footer>
   )
 }

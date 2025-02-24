@@ -134,81 +134,90 @@ const DesktopNav = ({ navItems, visible }: NavbarProps) => {
 	);
 };
 
+const MobileNavLink = ({ href, onClick, children }: { href: string; onClick: () => void; children: React.ReactNode }) => (
+	<motion.div
+		initial={{ opacity: 0, y: -20 }}
+		animate={{ opacity: 1, y: 0 }}
+		className="w-full text-center"
+	>
+		<Link
+			href={href}
+			onClick={onClick}
+			className="text-2xl font-medium text-white/90 hover:text-white transition-colors"
+		>
+			{children}
+		</Link>
+	</motion.div>
+);
+
 const MobileNav = ({ navItems, visible }: NavbarProps) => {
 	const [open, setOpen] = useState(false);
+	const closeMenu = () => setOpen(false);
+
 	return (
-		<>
-			<motion.div
+		<div className="lg:hidden">
+			<motion.nav
+				initial={false}
 				animate={{
-					background: visible ? "rgba(0, 0, 0, 0.7)" : "rgba(0, 0, 0, 0.4)",
-					width: visible ? "80%" : "90%",
-					y: visible ? 0 : 8,
-					borderRadius: open ? "24px" : "full",
-					padding: "8px 16px",
+					background: visible || open ? "rgba(0, 0, 0, 0.9)" : "rgba(0, 0, 0, 0.4)",
+					height: open ? "100vh" : "auto",
 				}}
-				initial={{
-					width: "80%",
-					background: "rgba(0, 0, 0, 0.4)",
-				}}
-				transition={{
-					type: "spring",
-					stiffness: 400,
-					damping: 30,
-				}}
-				className={cn(
-					"flex relative flex-col lg:hidden w-full justify-between items-center max-w-[calc(100vw-2rem)] mx-auto z-50 backdrop-saturate-[1.8] border border-solid border-white/40 rounded-full"
-				)}
+				transition={{ duration: 0.3 }}
+				className="fixed inset-x-0 top-0 z-50"
 			>
-				<div className="flex flex-row justify-between items-center w-full">
-					<Image src="/logo.svg" alt="Logo" width="120" height="32" />
-					{open ? (
-						<IconX className="text-white/90" onClick={() => setOpen(!open)} />
-					) : (
-						<IconMenu2
-							className="text-white/90"
+				<div className="container mx-auto px-4 py-4">
+					<div className="flex items-center justify-between">
+						<Link href="/" onClick={closeMenu}>
+							<Image 
+								src="/logo.svg" 
+								alt="42Blockchain logo" 
+								width="100" 
+								height="28"
+								className="relative z-50" 
+								priority
+							/>
+						</Link>
+						<button
 							onClick={() => setOpen(!open)}
-						/>
-					)}
+							className="relative z-50 p-2 text-white/90 hover:text-white transition-colors"
+							aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+						>
+							{open ? <IconX size={24} /> : <IconMenu2 size={24} />}
+						</button>
+					</div>
 				</div>
 
 				<AnimatePresence>
 					{open && (
 						<motion.div
-							initial={{
-								opacity: 0,
-								y: -20,
-							}}
-							animate={{
-								opacity: 1,
-								y: 0,
-							}}
-							exit={{
-								opacity: 0,
-								y: -20,
-							}}
-							transition={{
-								type: "spring",
-								stiffness: 400,
-								damping: 30,
-							}}
-							className="flex rounded-3xl absolute top-16 bg-black/80 backdrop-blur-xl backdrop-saturate-[1.8] inset-x-0 z-50 flex-col items-start justify-start gap-4 w-full px-6 py-8"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.2 }}
+							className="fixed inset-0 z-40 flex items-center justify-center px-4"
 						>
-							{navItems.map(
-								(navItem: { link: string; name: string }, idx: number) => (
-									<Link
-										key={`link=${idx}`}
-										href={navItem.link}
-										onClick={() => setOpen(false)}
-										className="relative text-white/90 hover:text-white transition-colors"
+							<nav className="flex flex-col items-center w-full gap-8">
+								{navItems.map((item, idx) => (
+									<motion.div
+										key={item.name}
+										initial={{ opacity: 0, y: -20 }}
+										animate={{ 
+											opacity: 1, 
+											y: 0,
+											transition: { delay: idx * 0.1 } 
+										}}
+										className="w-full"
 									>
-										<motion.span className="block">{navItem.name}</motion.span>
-									</Link>
-								)
-							)}
+										<MobileNavLink href={item.link} onClick={closeMenu}>
+											{item.name}
+										</MobileNavLink>
+									</motion.div>
+								))}
+							</nav>
 						</motion.div>
 					)}
 				</AnimatePresence>
-			</motion.div>
-		</>
+			</motion.nav>
+		</div>
 	);
 };

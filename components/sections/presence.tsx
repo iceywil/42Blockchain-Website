@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export function Presence() {
   return (
-    <section className="padding-y " id='about'>
+    <section className="padding-y" id='about'>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="relative max-md:hidden">

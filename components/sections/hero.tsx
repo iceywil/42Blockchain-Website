@@ -12,8 +12,8 @@ export function Hero() {
 	const discordLink = socialLinks.find(link => link.label === 'Discord')?.href
 	return (
 		<section className="relative overflow-hidden padding-y container mx-auto px-4" id='hero'>
-			<div className="flex">
-				<div className="w-2/3">
+			<div className="flex items-center justify-between gap-4">
+				<div className="w-full lg:w-3/5">
 					<div className="mb-8 flex justify-center">
 						<div
 							className="relative rounded-full px-3 py-1 text-sm max-[330px]:text-xs 
@@ -48,7 +48,7 @@ export function Hero() {
 						</div>
 					</div>
 				</div>
-				<div className="w-1/3">
+				<div className="hidden lg:block lg:w-2/5 h-[600px]">
 					<Globe_data />
 				</div>
 			</div>

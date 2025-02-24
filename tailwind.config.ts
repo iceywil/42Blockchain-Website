@@ -58,6 +58,15 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
+      },
+      keyframes: {
+        partnerScroll: {
+          '0%': { transform: 'translateX(35%)' },
+          '100%': { transform: 'translateX(-360%)' }
+        }
+      },
+      animation: {
+        'partner-scroll': 'partnerScroll 35s linear infinite',
       }
     }
   },
