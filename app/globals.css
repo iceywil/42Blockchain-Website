@@ -14,6 +14,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  .pause-animation {
+    animation-play-state: paused;
+  }
 }
 
 @layer base {
@@ -91,5 +95,14 @@ body {
 @layer utilities {
   .padding-y {
     @apply py-20 sm:py-32;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

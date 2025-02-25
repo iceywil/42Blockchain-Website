@@ -1,31 +1,44 @@
+"use client";
+
+import { WarpBackground } from '@/components/magicui/warp-background';
 import Image from 'next/image';
-import Link from 'next/link';
-import { Navbar } from '@/components/navbar';
+import { BlurFade } from '@/components/magicui/blur-fade';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
   return (
-    <footer className="border-t border-white/10">
-      <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center gap-6 md:gap-0">
-        <div className="flex items-center justify-center md:justify-start w-full md:w-auto">
-          <Link href={"/"}>
-            <Image
-              src="/logo.svg"
-              alt="42Blockchain logo"
-              width={120}
-              height={53}
-              priority
-              className="h-auto"
-            />
-          </Link>
-        </div>
-        <Navbar className="flex flex-wrap justify-center md:justify-end w-full md:flex-1" />
-      </div>
-      <div className="container mx-auto px-4 pb-4">
-        <p className="text-gray-400 text-sm text-center">
-          © {currentYear} 42Blockchain. All rights reserved.
-        </p>
+    <footer className="relative min-h-[400px] flex items-center justify-center overflow-hidden border-0">
+      <WarpBackground
+        className="absolute inset-0 border-0"
+        gridColor="rgba(6, 182, 212, 0.1)"
+      >
+        <div className="border-0" />
+      </WarpBackground>
+      <div className="relative container mx-auto px-4 py-16 text-center border-0">
+        <BlurFade>
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+            You've reached the edge of our blockchain universe
+          </h3>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="group flex flex-col items-center gap-3 mx-auto transition-transform hover:scale-110 border-0"
+          >
+            <div className="w-12 h-12 rounded-full bg-black/20 backdrop-blur-sm border-0
+              flex items-center justify-center transition-all duration-300
+              group-hover:bg-light-blue/10">
+              <Image
+                src="/42favicon.svg"
+                alt="42 Logo"
+                width={24}
+                height={24}
+                className="transition-transform group-hover:-translate-y-1"
+              />
+            </div>
+            <span className="text-sm text-white/60 group-hover:text-light-blue transition-colors">
+              Back to top
+            </span>
+          </button>
+        </BlurFade>
       </div>
     </footer>
-  )
+  );
 }

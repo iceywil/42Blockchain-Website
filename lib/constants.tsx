@@ -20,8 +20,8 @@ import { YouTube } from '@/components/svg/youtube'
 import { Zealy } from '@/components/svg/zealy'
 
 export const stats = [
-  { label: "Members", value: "2053", icon: Users },
-  { label: "Campus", value: "54", icon: GraduationCap },
+  { label: "Members", value: 2053, icon: Users },
+  { label: "Campus", value: 54, icon: GraduationCap },
   { label: "Projects", value: "20+", icon: Rocket },
   { label: "Partners", value: "10+", icon: Building2 },
 ]
@@ -84,20 +84,47 @@ export const eventsList = [
     title: "ETH Global Bangkok",
     date: "11/2024",
     description: "Join us for an exciting blockchain development hackathon in the heart of Thailand.",
-    image: eth_global_bangkok
+    image: eth_global_bangkok,
+    link: "https://ethglobal.com/events/bangkok"
   },
   {
     id: 2,
     title: "Algorand Hackthon",
     date: "11/2024",
     description: "Explore the possibilities of Algorand blockchain technology in this intensive hackathon.",
-    image: algorand_hackathon
+    image: algorand_hackathon,
+    link: "https://discord.gg/2NKXT7X8pe"
   },
   {
     id: 3,
     title: "Kiln Conference",
     date: "11/2024",
     description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
-    image: kiln_conf
+    image: kiln_conf,
+    link: "https://www.kiln.fi/"
+  },
+  {
+    id: 4,
+    title: "ETH Global Bangkok",
+    date: "11/2024",
+    description: "Join us for an exciting blockchain development hackathon in the heart of Thailand.",
+    image: eth_global_bangkok,
+    link: "https://ethglobal.com/events/bangkok"
+  },
+  {
+    id: 5,
+    title: "Algorand Hackthon",
+    date: "11/2024",
+    description: "Explore the possibilities of Algorand blockchain technology in this intensive hackathon.",
+    image: algorand_hackathon,
+    link: "https://discord.gg/2NKXT7X8pe"
+  },
+  {
+    id: 6,
+    title: "Kiln Conference",
+    date: "11/2024",
+    description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
+    image: kiln_conf,
+    link: "https://www.kiln.fi/"
   }
 ]

@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/hero";
 import { Presence } from "@/components/sections/presence";
 import { Partnership } from "@/components/sections/partnership";
 import { Contact } from "@/components/sections/contact";
+import { Event } from "@/components/sections/event";
 
 
 export default function Home() {
@@ -11,8 +12,9 @@ export default function Home() {
     <section className="container mx-auto">
       <Hero />
       <Presence />
-      <Partnership />
       <Contact />
+      <Partnership />
+      <Event />
     </section>
   );
 }
