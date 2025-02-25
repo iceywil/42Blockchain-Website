@@ -16,7 +16,7 @@ export function Footer() {
       <div className="relative container mx-auto px-4 py-16 text-center border-0">
         <BlurFade>
           <h3 className="text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-            You've reached the edge of our blockchain universe
+            You&apos;ve reached the edge of our blockchain universe
           </h3>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

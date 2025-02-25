@@ -1,13 +1,10 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-
-import { socialLinks } from '@/lib/constants'
 import Link from 'next/link'
 import { Globe_data } from '@/components/globe_data'
 import { SparklesPreview } from '@/components/sparkles'
 
 export function Hero() {
-	const discordLink = socialLinks.find(link => link.label === 'Discord')?.href
 	return (
 		<section className="relative overflow-hidden h-[95vh] flex items-center justify-center container mx-auto px-4" id='hero'>
 			{/* Globe en background */}
