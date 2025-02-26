@@ -1,7 +1,5 @@
 import React from 'react'
 import { socialLinks } from '@/lib/constants'
-import { stats } from '@/lib/constants'
-import { Stats } from '@/components/stats'
 import { BlurFade } from '@/components/magicui/blur-fade'
 
 export function Contact() {
@@ -19,12 +17,6 @@ export function Contact() {
           </div>
         </BlurFade>
 
-        <BlurFade inView delay={0.1}>
-        <div className="m-10">
-          <Stats stats={stats} />
-        </div>
-        </BlurFade>
-
         <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto">
           {socialLinks.map(({ label, href, icon }, index) => (
             <BlurFade key={label} delay={index * 0.1} inView>
@@ -40,9 +32,6 @@ export function Contact() {
                 <div className="text-xl text-white/60 group-hover:text-light-blue transition-colors">
                   {icon}
                 </div>
-                {/* <span className="text-sm text-white/60 group-hover:text-white transition-colors">
-                  {label}
-                </span> */}
               </a>
             </BlurFade>
           ))}

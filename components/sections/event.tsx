@@ -22,7 +22,7 @@ function EventCard({ event }: { event: Event }) {
     >
       <CardContent className="p-0">
         <div className="flex flex-col md:flex-row">
-          <div className="relative w-full md:w-[55%] aspect-[16/9] overflow-hidden">
+          <div className="relative w-full md:w-[50%] aspect-[16/9] overflow-hidden">
             <Image
               src={event.image}
               alt={event.title}
@@ -35,7 +35,7 @@ function EventCard({ event }: { event: Event }) {
               group-hover:opacity-40" />
           </div>
 
-          <div className="relative flex flex-col justify-center w-full md:w-[45%] p-8">
+          <div className="relative flex flex-col justify-center w-full md:w-[50%] p-10">
             <p className="text-sm text-light-blue mb-3 transition-colors duration-500
               group-hover:text-blue-400">{event.date}</p>
             <h3 className="text-2xl font-semibold text-white mb-4 transition-colors duration-500

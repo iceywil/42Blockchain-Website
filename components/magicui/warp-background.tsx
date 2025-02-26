@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import React, { HTMLAttributes, useCallback, useMemo } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 
 interface WarpBackgroundProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -26,8 +26,13 @@ const Beam = ({
   delay: number;
   duration: number;
 }) => {
-  const brightness = Math.floor(Math.random() * 30) + 70;
-  const ar = Math.floor(Math.random() * 10) + 1;
+  const [brightness, setBrightness] = useState(70);
+  const [ar, setAr] = useState(1);
+
+  useEffect(() => {
+    setBrightness(Math.floor(Math.random() * 30) + 70);
+    setAr(Math.floor(Math.random() * 10) + 1);
+  }, []);
 
   return (
     <motion.div
@@ -64,24 +69,30 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
   gridColor = "hsl(var(--border))",
   ...props
 }) => {
-  const generateBeams = useCallback(() => {
-    const beams = [];
-    const cellsPerSide = Math.floor(100 / beamSize);
-    const step = cellsPerSide / beamsPerSide;
+  const [beams, setBeams] = useState<{ x: number; delay: number }[][]>([]);
 
-    for (let i = 0; i < beamsPerSide; i++) {
-      const x = Math.floor(i * step);
-      const delay =
-        Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
-      beams.push({ x, delay });
-    }
-    return beams;
+  useEffect(() => {
+    const generateBeams = () => {
+      const newBeams = [];
+      const cellsPerSide = Math.floor(100 / beamSize);
+      const step = cellsPerSide / beamsPerSide;
+
+      for (let side = 0; side < 4; side++) {
+        const sideBeams = [];
+        for (let i = 0; i < beamsPerSide; i++) {
+          const x = Math.floor(i * step);
+          const delay = Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
+          sideBeams.push({ x, delay });
+        }
+        newBeams.push(sideBeams);
+      }
+      setBeams(newBeams);
+    };
+
+    generateBeams();
   }, [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]);
 
-  const topBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const rightBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const bottomBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const leftBeams = useMemo(() => generateBeams(), [generateBeams]);
+  if (beams.length === 0) return null;
 
   return (
     <div className={cn("relative rounded border p-20", className)} {...props}>
@@ -99,7 +110,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
       >
         {/* top side */}
         <div className="absolute [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [width:100cqi]">
-          {topBeams.map((beam, index) => (
+          {beams[0].map((beam, index) => (
             <Beam
               key={`top-${index}`}
               width={`${beamSize}%`}
@@ -111,7 +122,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
         </div>
         {/* bottom side */}
         <div className="absolute top-full [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [width:100cqi]">
-          {bottomBeams.map((beam, index) => (
+          {beams[1].map((beam, index) => (
             <Beam
               key={`bottom-${index}`}
               width={`${beamSize}%`}
@@ -123,7 +134,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
         </div>
         {/* left side */}
         <div className="absolute left-0 top-0 [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:0%_0%] [transform:rotate(90deg)_rotateX(-90deg)] [width:100cqh]">
-          {leftBeams.map((beam, index) => (
+          {beams[2].map((beam, index) => (
             <Beam
               key={`left-${index}`}
               width={`${beamSize}%`}
@@ -135,7 +146,7 @@ export const WarpBackground: React.FC<WarpBackgroundProps> = ({
         </div>
         {/* right side */}
         <div className="absolute right-0 top-0 [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [width:100cqh] [transform-origin:100%_0%] [transform:rotate(-90deg)_rotateX(-90deg)]">
-          {rightBeams.map((beam, index) => (
+          {beams[3].map((beam, index) => (
             <Beam
               key={`right-${index}`}
               width={`${beamSize}%`}
