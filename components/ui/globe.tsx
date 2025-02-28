@@ -46,16 +46,24 @@ export type GlobeConfig = {
   };
   autoRotate?: boolean;
   autoRotateSpeed?: number;
+  ringPropagationSpeed?: number;
+  ringRepeatPeriod?: number;
 };
 
 interface WorldProps {
   globeConfig: GlobeConfig;
   data: Position[];
+  onLoad?: () => void;
 }
 
-let numbersOfRings = [0];
+// Type extension for proper TypeScript recognition
+interface ExtendedThreeGlobe extends ThreeGlobe {
+  // Add missing methods to prevent TypeScript errors
+  globeMaterial: () => any;
+  atmosphereMaterial?: () => any;
+}
 
-export function Globe({ globeConfig, data }: WorldProps) {
+export function Globe({ globeConfig, data, onLoad }: WorldProps) {
   const [globeData, setGlobeData] = useState<
     | {
         size: number;
@@ -67,7 +75,8 @@ export function Globe({ globeConfig, data }: WorldProps) {
     | null
   >(null);
 
-  const globeRef = useRef<ThreeGlobe | null>(null);
+  const globeRef = useRef<ExtendedThreeGlobe | null>(null);
+  const ringsRef = useRef<any[]>([]);
 
   const defaultProps = useMemo(() => ({
     pointSize: 1,
@@ -83,24 +92,44 @@ export function Globe({ globeConfig, data }: WorldProps) {
     arcLength: 0.9,
     rings: 1,
     maxRings: 3,
+    ringPropagationSpeed: 3,
+    ringRepeatPeriod: 500,
     ...globeConfig,
   }), [globeConfig]);
 
+  // Building globe materials with proper atmosphere
   const _buildMaterial = useCallback(() => {
     if (!globeRef.current) return;
 
-    const globeMaterial = globeRef.current.globeMaterial() as unknown as {
+    const globeMaterial = globeRef.current.globeMaterial() as {
       color: Color;
       emissive: Color;
       emissiveIntensity: number;
       shininess: number;
     };
+    
     globeMaterial.color = new Color(globeConfig.globeColor);
     globeMaterial.emissive = new Color(globeConfig.emissive);
     globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
     globeMaterial.shininess = globeConfig.shininess || 0.9;
+    
+    // Safely check if atmosphereMaterial exists
+    try {
+      if (typeof globeRef.current.atmosphereMaterial === 'function') {
+        const atmosphereMaterial = globeRef.current.atmosphereMaterial();
+        if (atmosphereMaterial && typeof atmosphereMaterial === 'object') {
+          // Safely set opacity if the property exists
+          if ('opacity' in atmosphereMaterial) {
+            atmosphereMaterial.opacity = 0.8;
+          }
+        }
+      }
+    } catch (error) {
+      console.warn("Unable to access atmosphere material", error);
+    }
   }, [globeConfig, globeRef]);
 
+  // Building data points from arcs
   const _buildData = useCallback(() => {
     const arcs = data;
     const points = [];
@@ -123,7 +152,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       });
     }
 
-    // remove duplicates for same lat and lng
+    // Remove duplicates for same lat and lng
     const filteredPoints = points.filter(
       (v, i, a) =>
         a.findIndex((v2) =>
@@ -136,16 +165,21 @@ export function Globe({ globeConfig, data }: WorldProps) {
     setGlobeData(filteredPoints);
   }, [data, defaultProps.pointSize]);
 
+  // Initialize data and materials
   useEffect(() => {
     if (globeRef.current) {
       _buildData();
       _buildMaterial();
+      // Signal load complete
+      if (onLoad) setTimeout(onLoad, 1000);
     }
-  }, [_buildData, _buildMaterial]);
+  }, [_buildData, _buildMaterial, onLoad]);
 
+  // Start animations
   const startAnimation = useCallback(() => {
     if (!globeRef.current || !globeData) return;
 
+    // Configure arc animations
     globeRef.current
       .arcsData(data)
       .arcStartLat((d: object) => (d as Position).startLat * 1)
@@ -160,6 +194,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
+    // Configure point decorations
     globeRef.current
       .pointsData(data)
       .pointColor((point: object) => (point as Position).color)
@@ -167,16 +202,25 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .pointAltitude(0.0)
       .pointRadius(2);
 
-    globeRef.current
-      .ringsData([])
-      .ringColor((t: number) => `rgba(255, 255, 255, ${1 - t})`)
-      .ringMaxRadius(defaultProps.maxRings)
-      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
-      .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
-      );
+    // Safely configure rings
+    try {
+      if (typeof globeRef.current.ringsData === 'function') {
+        globeRef.current
+          .ringsData(ringsRef.current)
+          .ringColor((t: number) => `rgba(255, 255, 255, ${1 - t})`)
+          .ringMaxRadius(defaultProps.maxRings)
+          .ringPropagationSpeed(defaultProps.ringPropagationSpeed || RING_PROPAGATION_SPEED)
+          .ringRepeatPeriod(
+            defaultProps.ringRepeatPeriod || 
+            (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+          );
+      }
+    } catch (error) {
+      console.warn("Unable to configure rings", error);
+    }
   }, [data, defaultProps, globeData, globeRef]);
 
+  // Setup hexagon polygons and start animation
   useEffect(() => {
     if (globeRef.current && globeData) {
       globeRef.current
@@ -191,26 +235,79 @@ export function Globe({ globeConfig, data }: WorldProps) {
     }
   }, [globeData, defaultProps, startAnimation]);
 
+  // Animate rings on globe
   useEffect(() => {
     if (!globeRef.current || !globeData) return;
 
+    // Generate initial rings
+    const initialRings = [];
+    for (let i = 0; i < Math.min(3, data.length); i++) {
+      if (data[i]) {
+        initialRings.push({
+          lat: data[i].startLat,
+          lng: data[i].startLng,
+          color: data[i].color,
+          altitude: 0,
+        });
+      }
+    }
+    ringsRef.current = initialRings;
+    
+    // Safely update rings data
+    try {
+      if (typeof globeRef.current.ringsData === 'function') {
+        globeRef.current.ringsData(ringsRef.current);
+      }
+    } catch (error) {
+      console.warn("Unable to update rings data", error);
+    }
+
+    // Animate rings on an interval
     const interval = setInterval(() => {
       if (!globeRef.current || !globeData) return;
-      numbersOfRings = genRandomNumbers(
-        0,
-        data.length,
-        Math.floor((data.length * 4) / 5)
-      );
-
-      globeRef.current.ringsData(
-        globeData.filter((d, i) => numbersOfRings.includes(i))
-      );
+      
+      // Generate new rings at random data points
+      const newRings = [];
+      const numRings = Math.min(4, data.length);
+      const indicesToUse = genRandomNumbers(0, data.length, numRings);
+      
+      for (let i = 0; i < indicesToUse.length; i++) {
+        const idx = indicesToUse[i];
+        // Add rings at both start and end points of arcs
+        if (data[idx]) {
+          // Start point ring
+          newRings.push({
+            lat: data[idx].startLat,
+            lng: data[idx].startLng,
+            color: data[idx].color,
+            altitude: 0,
+          });
+          // End point ring
+          newRings.push({
+            lat: data[idx].endLat,
+            lng: data[idx].endLng,
+            color: data[idx].color,
+            altitude: 0,
+          });
+        }
+      }
+      
+      ringsRef.current = newRings;
+      
+      // Safely update rings data
+      try {
+        if (typeof globeRef.current.ringsData === 'function') {
+          globeRef.current.ringsData(ringsRef.current);
+        }
+      } catch (error) {
+        console.warn("Unable to update rings data in interval", error);
+      }
     }, 2000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [data.length, globeData]);
+  }, [data, globeData]);
 
   return (
     <>
@@ -239,7 +336,7 @@ export function World(props: WorldProps) {
     <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
       <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
-		<directionalLight
+      <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}
       />
@@ -258,8 +355,8 @@ export function World(props: WorldProps) {
         enableZoom={false}
         minDistance={cameraZ}
         maxDistance={cameraZ}
-        autoRotateSpeed={1}
-        autoRotate={true}
+        autoRotateSpeed={globeConfig.autoRotateSpeed || 1}
+        autoRotate={globeConfig.autoRotate !== false}
         minPolarAngle={Math.PI / 3.5}
         maxPolarAngle={Math.PI - Math.PI / 3}
       />
