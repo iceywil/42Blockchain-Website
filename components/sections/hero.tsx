@@ -1,55 +1,73 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { Stats } from '@/components/stats'
-import { stats } from '@/lib/constants'
-import { socialLinks } from '@/lib/constants'
 import Link from 'next/link'
 import { Globe_data } from '@/components/globe_data'
 import { SparklesPreview } from '@/components/sparkles'
-import { Text_Effect } from '@/components/text_effect'
+import { stats } from '@/lib/constants'
+import { NumberTicker } from '@/components/magicui/number-ticker'
+import { BlurFade } from '@/components/magicui/blur-fade'
+import { Arrow } from '@/components/svg/arrow'
 
 export function Hero() {
-	const discordLink = socialLinks.find(link => link.label === 'Discord')?.href
 	return (
-		<section className="relative overflow-hidden padding-y container mx-auto px-4" id='hero'>
-			<div className="flex">
-				<div className="w-2/3">
-					<div className="mb-8 flex justify-center">
-						<div
-							className="relative rounded-full px-3 py-1 text-sm max-[330px]:text-xs 
-                leading-6 text-gray-300 bg-glass border border-white/10"
-						>
-							Announcing our next event{' '}
-							<Link href={String(discordLink)} target='_blank' className="font-semibold text-light-blue">
-								Read more <span aria-hidden="true">&rarr;</span>
-							</Link>
-						</div>
-					</div>
-					<div className="text-center">
-						<SparklesPreview />
-						<Stats stats={stats} />
-						<div className="py-6">
-							<Text_Effect />
-						</div>
-						{/*             <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-300 mb-8">
-              42Blockchain is the largest Blockchain Developer Student&apos;s Union in the world.
-              Our members are students and alumni from the programming school 42 École 42,
-              aiming to empower our 2000+ members in 30+ countries.
-            </p> */}
-						<div className="flex justify-center gap-4">
-							<Button className="bg-light-blue hover:bg-light-blue/85 active:hover:bg-light-blue/85 text-white">
-								<a href={discordLink} target='_blank'>Get Started</a>
-							</Button>
-							<Button variant="outline"
-								className="border-light-blue text-light-blue hover:bg-light-blue/40 hover:text-white/90 bg-black"
-							>
-								<Link href="/#contact">Learn More</Link>
-							</Button>
-						</div>
-					</div>
-				</div>
-				<div className="w-1/3">
+		<section className="relative overflow-hidden min-h-[95vh] py-20 flex items-center justify-center container mx-auto px-4" id='hero'>
+
+			<div className="absolute inset-0 opacity-75">
+				<div className="w-full h-full">
 					<Globe_data />
+				</div>
+			</div>
+
+			<div className="relative z-10 flex flex-col items-center justify-center w-full max-w-5xl mx-auto text-center">
+				<div className="w-full">
+					<BlurFade delay={0}>
+						<div className="relative mb-16">
+							<SparklesPreview />
+						</div>
+					</BlurFade>
+					
+					{/* Stats */}
+					<div className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+						{stats.map((stat, idx) => (
+							<BlurFade key={stat.label} delay={0.1 * (idx + 1)}>
+								<div className="flex flex-col items-center p-4 rounded-lg bg-black/20 backdrop-blur-sm border border-white/10">
+									<p className="text-sm text-gray-400 mb-3">{stat.label}</p>
+									<div className="flex items-center gap-3">
+										<stat.icon className="w-6 h-6 text-light-blue" />
+										<div className="text-xl font-medium text-white">
+											{typeof stat.value === 'number' ? (
+												<NumberTicker
+													value={stat.value}
+													className="font-medium text-white"
+													direction="up"
+												/>
+											) : (
+												stat.value
+											)}
+										</div>
+									</div>
+								</div>
+							</BlurFade>
+						))}
+					</div>
+					
+					<BlurFade delay={0.2}>
+						<div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
+							<Button asChild variant="hero" size="hero">
+								<Link href="/#event" className="flex items-center gap-2">
+									<span>See last event</span>
+									<Arrow />
+								</Link>
+							</Button>
+							<Button asChild variant="hero" size="hero">
+								<Link href="/#contact" className="flex items-center gap-2">
+									<span>Contact Us</span>
+									<Arrow />
+								</Link>
+							</Button>
+						</div>
+					</BlurFade>
+
 				</div>
 			</div>
 		</section>

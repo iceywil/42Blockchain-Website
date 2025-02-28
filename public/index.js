@@ -10,7 +10,7 @@ import ripple from "./ripple.png";
 import scaleway from "./scaleway.png";
 import solana from "./solana.png";
 import starknet from "./starknet.png";
-
+import test from "./event/test.jpeg";
 export {
   logo,
   algorand_hackathon,
@@ -24,4 +24,5 @@ export {
   scaleway,
   solana,
   starknet,
+  test,
 };

@@ -1,48 +1,45 @@
 "use client";
 
-import { useRef, useEffect } from 'react'
 import { partnerLogos } from '@/lib/constants'
 import Image from 'next/image'
-
-function usePartnerCarousel() {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const container = ref.current
-    if (!container) return
-
-    const content = container.innerHTML
-    container.innerHTML += content
-  }, [])
-
-  return ref
-}
+import { Marquee } from '@/components/magicui/marquee'
+import { BlurFade } from '@/components/magicui/blur-fade'
 
 export function Partnership() {
-  const carouselRef = usePartnerCarousel()
-
   return (
-    <section className="padding-y">
+    <section className="padding-y bg-black/30 backdrop-blur-sm" id="partners">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Partners</h2>
-        <div
-          ref={carouselRef}
-          className="flex items-center space-x-12 overflow-x-hidden whitespace-nowrap"
-        >
-          {partnerLogos.map((partner, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 transition-transform duration-300"
+        <BlurFade inView>
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+              Partners
+            </h2>
+            <p className="text-gray-400 text-lg md:text-xl">
+              Working together to advance blockchain education
+            </p>
+          </div>
+        </BlurFade>
+        <BlurFade inView>
+          <div className="bg-black/20 backdrop-blur-sm rounded-lg p-8">
+            <Marquee 
+              className="h-[60px]"
             >
-              <Image
-                src={partner.logo}
-                alt={partner.alt}
-                className="h-10 w-auto"
-                priority
-              />
-            </div>
-          ))}
-        </div>
+              {partnerLogos.map((partner, index) => (
+                <div 
+                  key={`${partner.alt}-${index}`}
+                  className="flex-shrink-0 px-8 flex items-center"
+                >
+                  <Image
+                    src={partner.logo}
+                    alt={partner.alt}
+                    className="h-10 w-auto object-contain"
+                    priority
+                  />
+                </div>
+              ))}
+            </Marquee>
+          </div>
+        </BlurFade>
       </div>
     </section>
   )
