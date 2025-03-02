@@ -9,7 +9,7 @@ import Script from "next/script"
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
-  title: "42Blockchain | Largest Blockchain Developer Student's Union",
+  title: "42Blockchain",
   description: "42Blockchain is the largest Blockchain Developer Student's Union, connecting 2000+ members across 54 campuses worldwide. Learn blockchain development, join hackathons, and connect with industry partners.",
   keywords: "blockchain, developer, student union, 42 school, web3, cryptocurrency, blockchain education, blockchain development",
   authors: [{ name: "42Blockchain" }],

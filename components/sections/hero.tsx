@@ -7,6 +7,7 @@ import { BlurFade } from '@/components/magicui/blur-fade'
 import { socialLinks } from '@/lib/constants'
 import { ArrowUpRight } from 'lucide-react'
 import { HyperText } from '../magicui/hyper-text'
+import { SparklesPreview } from '../sparkles'
 
 export function Hero() {
 	const discordLink = socialLinks.find(link => link.label === 'Discord')?.href
@@ -49,11 +50,13 @@ export function Hero() {
 							</div>
 						</BlurFade>
 
+
+
 						{/* Stats Grid */}
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
 							{stats.map((stat, idx) => (
 								<BlurFade key={stat.label} delay={0.1 * (idx + 1)}>
-									<div className="relative flex flex-col items-center p-4 rounded-lg border border-white/10 hover:border-light-blue/50 transition-colors overflow-hidden group">
+									<div className="relative flex flex-col items-center p-4 rounded-lg border border-white/10 transition-colors overflow-hidden group">
 										{/* Backdrop overlay */}
 										<div className="absolute inset-0 bg-black/80 backdrop-blur-lg -z-10"></div>
 
@@ -79,11 +82,13 @@ export function Hero() {
 
 						{/* Contact button */}
 						<BlurFade delay={0.2}>
+
 							<div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 pt-4">
 								<Link href="#contact" className="flex items-center gap-2 px-8 py-3.5 font-medium text-gray-900 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 group">
 									<span>Contact Us</span>
 								</Link>
 							</div>
+							<SparklesPreview />
 						</BlurFade>
 					</div>
 				</div>

@@ -1,4 +1,3 @@
-"use client";
 
 import React, { Suspense, lazy } from 'react';
 import { Hero } from "@/components/sections/hero";
@@ -6,6 +5,7 @@ import { Hero } from "@/components/sections/hero";
 const Presence = lazy(() => import("@/components/sections/presence").then(mod => ({ default: mod.Presence })));
 const Partnership = lazy(() => import("@/components/sections/partnership").then(mod => ({ default: mod.Partnership })));
 const Contact = lazy(() => import("@/components/sections/contact").then(mod => ({ default: mod.Contact })));
+const Event = lazy(() => import("@/components/sections/event").then(mod => ({ default: mod.Event })));
 
 const SectionLoader = () => (
   <div className="w-full py-20 flex justify-center items-center">
@@ -16,21 +16,24 @@ const SectionLoader = () => (
 export default function Home() {
   return (
     <section className="container mx-auto">
-      {/* Hero is critical, so it's not lazy loaded */}
       <Hero />
       
-      {/* Below-the-fold content is lazy loaded */}
       <Suspense fallback={<SectionLoader />}>
         <Presence />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <Partnership />
       </Suspense>
-      
+			
+      <Suspense fallback={<SectionLoader />}>
+        <Event />
+      </Suspense>
+
       <Suspense fallback={<SectionLoader />}>
         <Contact />
       </Suspense>
+			
     </section>
   );
 }

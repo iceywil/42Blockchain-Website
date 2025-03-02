@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, Suspense, useCallback } from "react";
 import dynamic from "next/dynamic";
 
@@ -54,14 +55,15 @@ export function Globe_data() {
     autoRotateSpeed: isMobile ? 0.7 : 0.5,
   };
   
-  const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+  // Use useMemo to avoid recreating arrays on each render
+  const colors = React.useMemo(() => ["#06b6d4", "#3b82f6", "#6366f1"], []);
   
   // Ring points - key locations to show rings animation
-  const ringPoints = [
+  const ringPoints = React.useMemo(() => [
     { lat: 48.8566, lng: 2.3522, color: "#00ff00" }, // Paris
     { lat: 40.7128, lng: -74.0060, color: "#00ffff" }, // New York
     { lat: 35.6895, lng: 139.6917, color: "#ff00ff" }, // Tokyo
-  ];
+  ], []);
 
   // Generate arcs data with memoization to prevent unnecessary re-renders
   const sampleArcs = useCallback(() => {
@@ -167,7 +169,7 @@ export function Globe_data() {
     }
     
     return baseArcs;
-  }, [isMobile, colors]);
+  }, [isMobile, colors, ringPoints]);
 
   return (
     <div className="relative h-full w-full flex items-center justify-center">
