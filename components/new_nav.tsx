@@ -149,7 +149,7 @@ const MobileNav = ({ visible }: NavbarProps) => {
           Events
         </Link>
         <Link 
-          href="/#partnership"
+          href="/#partners"
           className="px-8 py-3 text-white/90 hover:bg-white/5 transition-colors"
           onClick={() => setMenuOpen(false)}
         >
