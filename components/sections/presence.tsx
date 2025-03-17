@@ -22,7 +22,7 @@ export function Presence() {
 								<br /> <br />
 								Fostering a truly global community of blockchain enthusiasts and developers. 
 								<br /> <br />
-								From Paris to San Francisco, Seoul to São Paulo, we're cultivating innovation hubs that drive the future of decentralized technologies.
+								From Paris to San Francisco, Seoul to São Paulo, we&apos;re cultivating innovation hubs that drive the future of decentralized technologies.
 							</p>
 						</BlurFade>
 						<BlurFade inView delay={0.2}>
