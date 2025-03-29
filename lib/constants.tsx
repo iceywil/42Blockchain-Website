@@ -78,7 +78,7 @@ export const eventsList = [
 		id: 25,
 		title: "Solana Dev Series 5/5",
 		date: "03/2025",
-		description: "Over 130 passionate participants gathered for our AI Agent Night with Superteam France 🇫🇷, an unforgettable evening of innovation, learning, and building! ✨",
+		description: "",
 		image: "/event/solana_dev_series_part_5.jpeg",
 		link: "https://x.com/SuperteamFRANCE/status/1892997719591133574"
 	},
@@ -86,7 +86,7 @@ export const eventsList = [
 		id: 24,
 		title: "Solana Dev Series 2/5",
 		date: "02/2025",
-		description: "Last week, over 130 passionate participants gathered for our AI Agent Night with Superteam France 🇫🇷, an unforgettable evening of innovation, learning, and building! ✨",
+		description: "",
 		image: "/event/solana_dev_series_part_2.jpeg",
 		link: "https://x.com/SuperteamFRANCE/status/1883515101459665057"
 	},
@@ -141,7 +141,7 @@ export const eventsList = [
 		id: 17,
 		title: "Kiln Conference",
 		date: "11/2024",
-		description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
+		description: "",
 		image: "/event/kiln_conference.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7264296882028351488"
 	},
@@ -149,21 +149,21 @@ export const eventsList = [
 		id: 16,
 		title: "ICP Online Workshop",
 		date: "11/2024",
-		description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
+		description: "",
 		image: "/event/icp_workshop.jpeg",
 	},
 	{
 		id: 15,
 		title: "How to win a Hackathon : Online Workshop",
 		date: "11/2024",
-		description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
+		description: "",
 		image: "/event/workshop_web3_hackathon.jpeg",
 	},
 	{
 		id: 14,
 		title: "Solana Pitch Deck Workshop",
 		date: "11/2024",
-		description: "A gathering of blockchain experts and enthusiasts discussing the future of Web3.",
+		description: "",
 		image: "/event/solana_pitch.jpeg",
 	},
 	{
@@ -178,7 +178,7 @@ export const eventsList = [
 		id: 12,
 		title: "Singapore Token2049 & Solana Breakpoint",
 		date: "10/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/singapore.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7245357834886877185"
 	},
@@ -187,7 +187,7 @@ export const eventsList = [
 		id: 11,
 		title: "Solana Rust Bootcamp",
 		date: "09/2024",
-		description: "During 2 days, our members ",
+		description: "",
 		image: "/event/solana_rust_bootcamp.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7239567512693059584"
 	},
@@ -195,7 +195,7 @@ export const eventsList = [
 		id: 10,
 		title: "Solana Colosseum Opening at 42 Tokyo",
 		date: "09/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/solana_colosseum_opening_tokyo.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7240360835150204928"
 	},
@@ -203,7 +203,7 @@ export const eventsList = [
 		id: 9,
 		title: "Solana Colosseum Opening at 42 Paris",
 		date: "09/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/solana_colosseum_opening.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7237397743537696768"
 	},
@@ -211,7 +211,7 @@ export const eventsList = [
 		id: 8,
 		title: "EthGlobal Hackathon Brussels",
 		date: "07/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/eth_global_brussels.jpg",
 		link: "	https://www.linkedin.com/feed/update/urn:li:activity:7239567512693059584"
 	},
@@ -219,7 +219,7 @@ export const eventsList = [
 		id: 7,
 		title: "EthCC Brusells",
 		date: "07/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/ethcc_brussels.jpg",
 		link: "	https://www.linkedin.com/feed/update/urn:li:activity:7239567512693059584"
 	},
@@ -227,7 +227,7 @@ export const eventsList = [
 		id: 6,
 		title: "Starknet Hackathon Build Station",
 		date: "06/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/starknet_build_station.jpeg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7239567512693059584"
 	},
@@ -235,7 +235,7 @@ export const eventsList = [
 		id: 5,
 		title: "Starknet Bootcamp",
 		date: "05/2024",
-		description: "During 4 days, our members ",
+		description: "",
 		image: "/event/starknet_bootcamp.jpg",
 		link: "https://www.linkedin.com/feed/update/urn:li:activity:7239567512693059584"
 	},
@@ -259,7 +259,7 @@ export const eventsList = [
 		id: 2,
 		title: "Solidity Bootcamp",
 		date: "03/2024",
-		description: "During 4 days, our members were taught to code in Solidity by an alumni of 42",
+		description: "",
 		image: "/event/solidity_workshop.jpg",
 	},
 	{
