@@ -38,6 +38,21 @@ export const Navbar = () => {
 };
 
 const DesktopNav = ({ visible }: NavbarProps) => {
+	const handleLinkClick = (e: React.MouseEvent, targetId: string) => {
+		e.preventDefault();
+		const target = document.querySelector(targetId);
+		if (target) {
+			const offset = 300;
+			const elementPosition = target.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.scrollY - offset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth"
+			});
+		}
+	};
+
 	return (
 		<div>
 			<motion.div
@@ -71,7 +86,7 @@ const DesktopNav = ({ visible }: NavbarProps) => {
 					<BlurFade delay={0.1}>
 						<Link 
 							href="/#event"
-							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-sm"
+							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-md"
 						>
 							Events
 						</Link>
@@ -79,7 +94,8 @@ const DesktopNav = ({ visible }: NavbarProps) => {
 					<BlurFade delay={0.2}>
 						<Link 
 							href="/#contact"
-							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-sm"
+							onClick={(e) => handleLinkClick(e, "#contact")}
+							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-md"
 						>
 							Contact
 						</Link>
@@ -91,6 +107,21 @@ const DesktopNav = ({ visible }: NavbarProps) => {
 };
 
 const MobileNav = ({ visible }: NavbarProps) => {
+	const handleLinkClick = (e: React.MouseEvent, targetId: string) => {
+		e.preventDefault();
+		const target = document.querySelector(targetId);
+		if (target) {
+			const offset = 50; // Décalage de 50px
+			const elementPosition = target.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.scrollY - offset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth"
+			});
+		}
+	};
+
 	return (
 		<div className="lg:hidden fixed top-0 left-0 right-0 z-50">
 			<div className={cn(
@@ -100,14 +131,14 @@ const MobileNav = ({ visible }: NavbarProps) => {
 			)}>
 				<BlurFade delay={0}>
 					<Link href="/">
-						<Image src="/logo.svg" alt="Logo" width="100" height="24" />
+						<Image src="/42Blockchain-logo.svg" alt="Logo" width="100" height="24" />
 					</Link>
 				</BlurFade>
 				<div className="flex items-center gap-6">
 					<BlurFade delay={0.1}>
 						<Link 
 							href="/#event"
-							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-sm"
+							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-md"
 						>
 							Events
 						</Link>
@@ -115,7 +146,8 @@ const MobileNav = ({ visible }: NavbarProps) => {
 					<BlurFade delay={0.2}>
 						<Link 
 							href="/#contact"
-							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-sm"
+							onClick={(e) => handleLinkClick(e, "#contact")}
+							className="text-white/90 hover:text-light-blue transition-colors duration-300 text-md"
 						>
 							Contact
 						</Link>

@@ -6,7 +6,7 @@ import { Text_Effect } from '@/components/text_effect'
 export function SparklesPreview() {
   return (
     <div className="w-full flex flex-col items-center justify-center overflow-hidden">
-      <h1 className="text-5xl md:text-7xl font-bold text-center text-white mb-4">
+      <h1 className="text-5xl md:text-7xl font-bold text-center text-white mb-4 max-md:mt-10">
         The Future of Blockchain Education
       </h1>
       <div className="py-4">
