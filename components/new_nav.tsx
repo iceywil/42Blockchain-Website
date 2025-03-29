@@ -64,7 +64,7 @@ const DesktopNav = ({ visible }: NavbarProps) => {
 			>
 				<BlurFade delay={0}>
 					<Link href="/">
-						<Image src="/logo.svg" alt="Logo" width="80" height="20" />
+						<Image src="/42Blockchain-logo.svg" alt="Logo" width="80" height="20" />
 					</Link>
 				</BlurFade>
 				<div className="flex items-center gap-8">

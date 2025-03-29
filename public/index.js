@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./42blockchain-logo.svg";
 import binance from "./binance.png";
 import bpi from "./bpi.png";
 import ledger from "./ledger.png";

@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/42favicon.svg" />
+        <link rel="icon" href="/42Blockchain-favicon.svg" />
       </head>
       <body
         className={`${inter.className} bg-black text-white min-h-screen relative `}
