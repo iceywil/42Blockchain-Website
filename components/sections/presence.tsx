@@ -7,7 +7,7 @@ export function Presence() {
 		<section className="padding-y" id='about'>
 			<div className="container mx-auto px-4">
 				<div className="grid md:grid-cols-2 gap-12 items-center">
-					<div className="relative max-md:hidden">
+					<div className="relative max-md:mb-20">
 						<Image unoptimized src="/42blockchain_logo.gif" alt="42Blockchain Logo" width={550} height={500} />
 					</div>
 					<div className="space-y-8">

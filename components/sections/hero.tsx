@@ -9,6 +9,21 @@ import { BlurFade } from '@/components/magicui/blur-fade'
 import { Arrow } from '@/components/svg/arrow'
 
 export function Hero() {
+	const handleLinkClick = (e: React.MouseEvent, targetId: string) => {
+		e.preventDefault();
+		const target = document.querySelector(targetId);
+		if (target) {
+			const offset = 300; // Décalage de 50px
+			const elementPosition = target.getBoundingClientRect().top;
+			const offsetPosition = elementPosition + window.scrollY - offset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: "smooth"
+			});
+		}
+	};
+
 	return (
 		<section className="relative overflow-hidden min-h-[95vh] py-20 flex items-center justify-center container mx-auto px-4" id='hero'>
 
@@ -60,7 +75,7 @@ export function Hero() {
 								</Link>
 							</Button>
 							<Button asChild variant="hero" size="hero">
-								<Link href="/#contact" className="flex items-center gap-2">
+								<Link href="/#contact" onClick={(e) => handleLinkClick(e, "#contact")} className="flex items-center gap-2">
 									<span>Contact Us</span>
 									<Arrow />
 								</Link>

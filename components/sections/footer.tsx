@@ -26,7 +26,7 @@ export function Footer() {
               flex items-center justify-center transition-all duration-300
               group-hover:bg-light-blue/10">
               <Image
-                src="/42favicon.svg"
+                src="/42Blockchain-favicon.svg"
                 alt="42 Logo"
                 width={24}
                 height={24}
