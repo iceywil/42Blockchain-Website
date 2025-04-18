@@ -14,7 +14,6 @@ import { Discord } from '@/components/svg/discord'
 import { Email } from '@/components/svg/email'
 import { YouTube } from '@/components/svg/youtube'
 import { Zealy } from '@/components/svg/zealy'
-import { link } from 'fs'
 
 export const stats = [
 	{ label: "Members", value: 2063, icon: Users },
