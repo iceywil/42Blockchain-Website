@@ -10,8 +10,8 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: "42Blockchain",
-  description: "42Blockchain is the largest Blockchain Developer Student's Union, connecting 2000+ members across 54 campuses worldwide. Learn blockchain development, join hackathons, and connect with industry partners.",
-  keywords: "blockchain, developer, student union, 42 school, web3, cryptocurrency, blockchain education, blockchain development",
+  description: "42Blockchain is the largest Blockchain Developer Student's Union in the world, connecting 2000+ members across 54 campuses worldwide. Learn blockchain development, join hackathons, and connect with industry partners.",
+  keywords: "blockchain, developer, student union, 42 School, web3, cryptocurrency, blockchain education, blockchain development",
   authors: [{ name: "42Blockchain" }],
   creator: "42Blockchain",
   publisher: "42Blockchain",
@@ -57,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/42Blockchain-favicon.svg" />
+        <link rel="icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="robots" content="index, follow" />
       </head>
