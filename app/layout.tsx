@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import "./globals.css"
 import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
-import Script from "next/script"
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
@@ -69,20 +69,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        
-        {/* Google Analytics - Replace with your actual Google Analytics ID */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
+        <Analytics />
       </body>
     </html>
   );
